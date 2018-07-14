@@ -12,5 +12,29 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'Currency market';
+});
+
+Route::prefix('currencies')->group(function () {
+    Route::get('/', 'CurrenciesController@showAll')
+        ->name('currencies');
+
+    Route::get('{id}', 'CurrenciesController@showParticular')
+        ->where('id', '[0-9]+')
+        ->name('particular-currency');
+
+    Route::get('add', 'CurrenciesController@showAddForm')
+        ->name('show-add-form');
+
+    Route::post('add', 'CurrenciesController@add')
+        ->name('add-currency');
+
+    Route::get('{id}/edit', 'CurrenciesController@showEditForm')
+        ->name('show-edit-form');
+
+    Route::post('{id}/edit', 'CurrenciesController@edit')
+        ->name('edit-currency');
+
+    Route::get('{id}/delete', 'CurrenciesController@delete')
+        ->name('delete-currency');
 });
