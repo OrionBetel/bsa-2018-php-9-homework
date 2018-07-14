@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return 'Currency market';
+    return view('home');
 });
 
 Route::prefix('currencies')->group(function () {
