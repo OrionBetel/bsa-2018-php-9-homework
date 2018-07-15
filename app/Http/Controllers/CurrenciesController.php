@@ -7,6 +7,11 @@ use App\Http\Requests\CurrencyRequest;
 
 class CurrenciesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function showAll()
     {
         $currencies = Currency::all()->toArray();

@@ -1,12 +1,10 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('title', 'All currencies')
 
-@section('heading')
-    <h1 class="display-4 text-center">Currency market</h1>
-@endsection
-
 @section('content')
+    <h1 class="display-4 text-center">Currency market</h1>
+
     @if (count($currencies) == 0)
         <p class="text-center">No currencies</p>
     @else

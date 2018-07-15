@@ -38,3 +38,5 @@ Route::prefix('currencies')->group(function () {
     Route::get('{id}/delete', 'CurrenciesController@delete')
         ->name('delete-currency');
 });
+
+Auth::routes();
