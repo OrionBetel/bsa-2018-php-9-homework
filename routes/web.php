@@ -18,10 +18,22 @@ Route::get('/', function () {
 Route::prefix('currencies')->group(function () {
     Route::get('/', 'CurrenciesController@showAll')
         ->name('currencies');
+    
+    Route::post('/', function () {
+        return redirect('/');
+    });
 
     Route::get('{id}', 'CurrenciesController@showParticular')
         ->where('id', '[0-9]+')
         ->name('particular-currency');
+
+    Route::put('{id}', function () {
+        return redirect('/');
+    });
+
+    Route::delete('{id}', function () {
+        return redirect('/');
+    });
 
     Route::get('add', 'CurrenciesController@showAddForm')
         ->name('show-add-form');

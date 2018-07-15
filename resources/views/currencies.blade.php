@@ -36,12 +36,17 @@
                             <span>{{ $currency['price'] }}</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-dark edit-button">
-                                <a href="{{ route('show-edit-form', ['id' => $currency['id']]) }}">Edit</a>
-                            </button>
+                            @can('update', $currency)
+                                <button type="button" class="btn btn-dark edit-button">
+                                    <a href="{{ route('show-edit-form', ['id' => $currency['id']]) }}">Edit</a>
+                                </button>
+                            @endcan
+                            
+                            @can('update', $currency)
                             <button type="button" class="btn btn-danger delete-button">
                                 <a href="{{ route('delete-currency', ['id' => $currency['id']]) }}">Delete</a>
                             </button>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

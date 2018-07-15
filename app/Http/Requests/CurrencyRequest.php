@@ -24,9 +24,9 @@ class CurrencyRequest extends FormRequest
     public function rules()
     {        
         return [
-            'title'      => 'required|unique:currency|min:2|max:255',
-            'short_name' => 'required|unique:currency|min:2|max:10',
-            'logo_url'   => 'required|unique:currency|url',
+            'title'      => 'required|min:2|max:255',
+            'short_name' => 'required|min:2|max:100',
+            'logo_url'   => 'required|url',
             'price'      => 'required|numeric|min:0',
         ];
     }

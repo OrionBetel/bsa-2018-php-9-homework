@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Currency;
 use App\Http\Requests\CurrencyRequest;
+use Gate;
 
 class CurrenciesController extends Controller
 {
@@ -14,25 +15,33 @@ class CurrenciesController extends Controller
     
     public function showAll()
     {
-        $currencies = Currency::all()->toArray();
+        $currencies = Currency::all();
         
         return view('currencies', ['currencies' => $currencies]);
     }
 
     public function showParticular($id)
     {
-        $currency = Currency::find($id)->toArray();
+        $currency = Currency::find($id);
         
         return view('currency', ['currencies' => [$currency]]);
     }
 
     public function showAddForm()
     {
+        if (Gate::denies('create', Currency::class)) {
+            return redirect('/');
+        }
+        
         return view('addCurrency');
     }
 
     public function add(CurrencyRequest $request)
     {
+        if (Gate::denies('create', Currency::class)) {
+            return redirect('/');
+        }
+        
         $validData = $request->validated();
         
         $currency = new Currency;
@@ -48,8 +57,12 @@ class CurrenciesController extends Controller
     }
     
     public function showEditForm($id)
-    {
-        $currency = Currency::find($id)->toArray();
+    {   
+        $currency = Currency::find($id);
+
+        if (Gate::denies('update', $currency)) {
+            return redirect('/');
+        }
         
         return view('editCurrency', ['currency' => $currency]);
     }
@@ -57,6 +70,10 @@ class CurrenciesController extends Controller
     public function edit(CurrencyRequest $request, $id)
     {
         $currency = Currency::find($id);
+        
+        if (Gate::denies('update', $currency)) {
+            return redirect('/');
+        }
         
         $newData = $request->validated();
 
@@ -71,8 +88,14 @@ class CurrenciesController extends Controller
 
     public function delete($id)
     {
-        Currency::find($id)->delete();
+        $currency = Currency::find($id);
+
+        if (Gate::denies('delete', $currency)) {
+            return redirect('/');
+        }
         
+        $currency->delete();
+
         return redirect()->route('currencies');
     }
 }
