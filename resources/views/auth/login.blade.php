@@ -12,6 +12,20 @@
                         @csrf
 
                         <div class="form-group row">
+                            <div class="col-md-8 offset-md-4">
+                                <a class="btn btn-dark" href="{{ url('login/github') }}" role="button">
+                                    <i class="fab fa-github fa-lg"></i> 
+                                    {{ __('Login with GitHub') }}
+                                </a>
+
+                                <a class="btn btn-danger" href="{{ url('login/google') }}" role="button">
+                                    <i class="fab fa-google-plus-g fa-lg"></i> 
+                                    {{ __('Login with Google+') }}
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
                             <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
